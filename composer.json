@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+   "autoload": {
+        "psr-0": {"": "src"},
+    },
+    "require": {
+        "vlucas/phpdotenv": "^2.2",
+        "nesbot/carbon": "~1.14"
+    }
+}
