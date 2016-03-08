@@ -2,16 +2,23 @@
 
 PHP Wrapper for fixer.io
 
-Installation
+## Installation
 
 ```
 > composer.phar install
 ```
 
-Usage
+## Usage
 
 ```
 $karensi  = new Karensi\Karensi('USD', 'CAD');
 $rates = $k->fetch_rate();
 $k->save('./rates/');
+```
+
+
+## Test
+
+```
+./bin/phpspec run
 ```
