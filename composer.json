@@ -23,6 +23,6 @@
     },
     "require": {
         "nesbot/carbon": "~1.14",
-        "vlucas/phpdotenv": "^2.2"
+        "vlucas/phpdotenv": "~1.0"
     }
 }
