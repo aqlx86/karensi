@@ -51,8 +51,8 @@ class Karensi
     {
         if (! $this->foreign)
         {
-            $env = new Dotenv(__DIR__);
-            $env->load(realpath('./'));
+            $env = new Dotenv;
+            $env->load(realpath(__DIR__.'/../../'));
 
             return getenv('SUPPORTED_CURRENCIES');
         }
