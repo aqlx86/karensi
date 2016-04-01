@@ -1,10 +1,13 @@
-# karensi
+# Karensi
 
-PHP Wrapper for fixer.io
+[![Build Status](https://travis-ci.org/aqlx86/karensi.svg?branch=master)](https://travis-ci.org/aqlx86/karensi)
+
+PHP Library for fixer.io foreign exchange rates and currency conversion.
 
 ## Installation
 
 ```
+> composer.phar require aqlx86/karensi
 > composer.phar install
 ```
 

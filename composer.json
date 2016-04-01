@@ -1,6 +1,6 @@
 {
     "name": "aqlx86/karensi",
-    "description": "PHP Library for fixer.io foreign exchange rates and currency conversion",
+    "description": "PHP Library for fixer.io foreign exchange rates and currency conversion.",
     "keywords": ["currency", "conversions", "rates"],
     "homepage": "https://github.com/aqlx86/karensi",
     "license": "MIT",
