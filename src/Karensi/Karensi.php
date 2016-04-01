@@ -2,7 +2,7 @@
 
 namespace Karensi;
 
-use Dotenv\Dotenv;
+use Dotenv;
 use Carbon\Carbon;
 
 class Karensi
@@ -14,8 +14,7 @@ class Karensi
 
     public function __construct($base, $foreign = null, $date = null)
     {
-        if (! $foreign)
-            $foreign = $this->get_supported_currencies();
+        $foreign = $this->get_supported_currencies();
 
         if (is_null($date) || $date == 'latest')
             $date = Carbon::today()->format('Y-m-d');
@@ -50,10 +49,20 @@ class Karensi
 
     public function get_supported_currencies()
     {
-        $env = new Dotenv(__DIR__);
-        $env->load();
+        if (! $this->foreign)
+        {
+            $env = new Dotenv(__DIR__);
+            $env->load(realpath('./'));
 
-        return getenv('SUPPORTED_CURRENCIES');
+            return getenv('SUPPORTED_CURRENCIES');
+        }
+
+        return $this->foreign;
+    }
+
+    public function set_supported_currencies($currencies)
+    {
+        $this->foreign = $currencies;
     }
 
     private function request($url, $params)
@@ -70,4 +79,6 @@ class Karensi
 
         return json_decode($data, true);
     }
+
+
 }
