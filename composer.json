@@ -18,8 +18,10 @@
     "config": {
         "bin-dir": "bin"
     },
-   "autoload": {
-        "psr-0": {"": "src"}
+    "autoload": {
+        "psr-4": {
+            "Karensi\\": "src/Karensi/"
+        }
     },
     "require": {
         "nesbot/carbon": "~1.14",
