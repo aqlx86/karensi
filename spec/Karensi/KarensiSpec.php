@@ -46,7 +46,6 @@ class KarensiSpec extends ObjectBehavior
 
     function it_can_fetch_rates_the_save_as_file()
     {
-        $this->it_can_set_supported_currencies();
         $this->it_can_fetch_rates();
         $this->save(realpath('./cache').'/');
     }
