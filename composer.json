@@ -1,4 +1,17 @@
 {
+    "name": "aqlx86/karensi",
+    "description": "PHP Library for fixer.io foreign exchange rates and currency conversion",
+    "keywords": ["currency", "conversions", "rates"],
+    "homepage": "https://github.com/aqlx86/karensi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnel Labarda",
+            "email": "aqlx86@gmail.com",
+            "homepage": "http://aql.ph/",
+            "role": "Maintainer"
+        }
+    ],
     "require-dev": {
         "phpspec/phpspec": "~2.0"
     },
@@ -6,10 +19,10 @@
         "bin-dir": "bin"
     },
    "autoload": {
-        "psr-0": {"": "src"},
+        "psr-0": {"": "src"}
     },
     "require": {
-        "vlucas/phpdotenv": "^2.2",
-        "nesbot/carbon": "~1.14"
+        "nesbot/carbon": "~1.14",
+        "vlucas/phpdotenv": "^2.2"
     }
 }
