@@ -13,12 +13,28 @@ PHP Library for fixer.io foreign exchange rates and currency conversion.
 
 ## Usage
 
+Fetch all
 ```
-$karensi  = new Karensi\Karensi('USD', 'CAD');
+$karensi  = new Karensi\Karensi('USD');
 $rates = $k->fetch_rate();
-$k->save('./rates/');
 ```
 
+Fetch specific currencies
+```
+$karensi  = new Karensi\Karensi('USD', ['CAD', 'PHP']);
+$rates = $k->fetch_rate();
+```
+
+Fetch historical rates 
+```
+$karensi  = new Karensi\Karensi('USD', ['CAD', 'PHP'], '2015-12-28');
+$rates = $k->fetch_rate();
+```
+
+Save fetched rates in json format
+```
+$karensi->save('./rates/');
+```
 
 ## Test
 
