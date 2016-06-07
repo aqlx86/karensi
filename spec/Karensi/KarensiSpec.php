@@ -14,32 +14,41 @@ class KarensiSpec extends ObjectBehavior
 
     function let()
     {
-        $this->beConstructedWith('USD');
+        $this->beConstructedWith('USD', ['PHP', 'CAD']);
     }
 
-    function load_supported_currencies()
+    function it_can_return_supported_currency_list()
     {
-        $this->get_supported_currencies()
-            ->shouldReturn("AUD,BGN,BRL,CAD,CHF,CNY,CZK,DKK,GBP,HKD,HRK,HUF,IDR,ILS,INR,JPY,KRW,MXN,MYR,NOK,NZD,PHP,PLN,RON,RUB,SEK,SGD,THB,TRY,USD,ZAR");
-    }
-
-    function it_can_set_supported_currencies()
-    {
-        $currencies = "USD,PHP";
-        $this->set_supported_currencies($currencies);
-    }
-
-    function it_can_set_and_get_supported_currencies()
-    {
-        $this->set_supported_currencies('USD,PHP');
+        $supported_currencies = [
+            'AUD','BGN','BRL','CAD','CHF','CNY','CZK','DKK','GBP',
+            'HKD','HRK','HUF','IDR','ILS','INR','JPY','KRW','MXN',
+            'MYR','NOK','NZD','PHP','PLN','RON','RUB','SEK','SGD',
+            'THB','TRY','USD','ZAR'
+        ];
 
         $this->get_supported_currencies()
-            ->shouldReturn('USD,PHP');
+            ->shouldReturn($supported_currencies);
+    }
+
+    function it_can_check_if_currency_is_supported()
+    {
+        $this->is_supported('USD')
+            ->shouldReturn(true);
+
+        $this->is_supported('XXX')
+            ->shouldReturn(false);
+    }
+
+    function it_can_validate_foreign_currency_if_supported()
+    {
+        $this->shouldNotThrow('\Exception')
+            ->duringValidate();
     }
 
     function it_can_fetch_rates()
     {
-        $this->load_supported_currencies();
+        $this->it_can_validate_foreign_currency_if_supported();
+
         $this->fetch_rate()
             ->shouldHaveKey('base');
     }

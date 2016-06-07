@@ -7,14 +7,22 @@ use Carbon\Carbon;
 
 class Karensi
 {
+    private $supported_currencies = [
+        'AUD','BGN','BRL','CAD','CHF','CNY','CZK','DKK','GBP',
+        'HKD','HRK','HUF','IDR','ILS','INR','JPY','KRW','MXN',
+        'MYR','NOK','NZD','PHP','PLN','RON','RUB','SEK','SGD',
+        'THB','TRY','USD','ZAR'
+    ];
+
     protected $base;
     protected $foreign;
     protected $date;
     protected $rates;
 
-    public function __construct($base, $foreign = null, $date = null)
+    public function __construct($base, array $foreign = [], $date = null)
     {
-        $foreign = $this->get_supported_currencies();
+        if (! $foreign)
+            $foreign = $this->supported_currencies;
 
         if (is_null($date) || $date == 'latest')
             $date = Carbon::today()->format('Y-m-d');
@@ -24,13 +32,25 @@ class Karensi
         $this->date = $date;
     }
 
+    public function get_supported_currencies()
+    {
+        return $this->supported_currencies;
+    }
+
+    public function is_supported($currency)
+    {
+        return in_array($currency, $this->supported_currencies);
+    }
+
     public function fetch_rate()
     {
+        $this->validate();
+
         $url = 'http://api.fixer.io/'.$this->date;
 
         $this->rates = $this->request($url, http_build_query([
             'base' => $this->base,
-            'symbols' => $this->foreign
+            'symbols' => implode(',', $this->foreign)
         ]));
 
         return $this->rates;
@@ -47,22 +67,12 @@ class Karensi
         file_put_contents($path . $filename, json_encode($this->rates['rates']));
     }
 
-    public function get_supported_currencies()
+    public function validate()
     {
-        if (! $this->foreign)
-        {
-            $env = new Dotenv;
-            $env->load(realpath(__DIR__.'/../../'));
+        $invalid = array_diff($this->foreign, $this->supported_currencies);
 
-            return getenv('SUPPORTED_CURRENCIES');
-        }
-
-        return $this->foreign;
-    }
-
-    public function set_supported_currencies($currencies)
-    {
-        $this->foreign = $currencies;
+        if (count($invalid))
+            throw new \Exception(sprintf('Not supported %s', implode(',', $invalid)));
     }
 
     private function request($url, $params)
@@ -79,6 +89,4 @@ class Karensi
 
         return json_decode($data, true);
     }
-
-
 }
