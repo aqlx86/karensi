@@ -20,10 +20,10 @@ class KarensiSpec extends ObjectBehavior
     function it_can_return_supported_currency_list()
     {
         $supported_currencies = [
-            'AUD','BGN','BRL','CAD','CHF','CNY','CZK','DKK','GBP',
-            'HKD','HRK','HUF','IDR','ILS','INR','JPY','KRW','MXN',
-            'MYR','NOK','NZD','PHP','PLN','RON','RUB','SEK','SGD',
-            'THB','TRY','USD','ZAR'
+            'AUD','BGN','BRL','CAD','CHF','CNY','CZK','DKK','EUR',
+            'GBP','HKD','HRK','HUF','IDR','ILS','INR','JPY','KRW',
+            'MXN','MYR','NOK','NZD','PHP','PLN','RON','RUB','SEK',
+            'SGD','THB','TRY','USD','ZAR'
         ];
 
         $this->get_supported_currencies()
